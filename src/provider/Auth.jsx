@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { getAuth,  signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase/firebase";
 import { createContext, useEffect } from "react";
