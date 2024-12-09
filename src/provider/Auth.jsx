@@ -12,9 +12,11 @@ const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider();
 
 
+// eslint-disable-next-line react/prop-types
 const Auth = ({ children }) => {
 
      const [user, setUser] = useState(null);
+     
 
      const googleLogin = () => {
 
