@@ -1,16 +1,45 @@
+import { getAuth,  signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase/firebase";
+import { createContext, useEffect } from "react";
+import { useState } from "react";
 
-//Global Var
 
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext(null);
+const auth = getAuth(app)
+const googleProvider = new GoogleAuthProvider(); 
 
 
 const Auth = () => {
+     
+     const [user, setUser] = useState(null);
 
+     const googleLogin = () => {
 
+         return signInWithPopup(auth, googleProvider)
+     }
+
+     useEffect(()=> {
+
+          const stateCheck = onAuthStateChanged(auth, (currentUser) => {
+               setUser(currentUser);
+          })
+          return () => {
+               stateCheck();
+          } 
+     }, [])
+
+     const infoUser = {
+          googleLogin, user
+     }
+
+      
+     
      return (
-          <div>
-               
-          </div>
+          <AuthContext.Provider value={infoUser}>
+               {children}
+          </AuthContext.Provider>
      );
 };
 
