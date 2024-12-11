@@ -1,14 +1,24 @@
+import ToDoCard from "./components/ToDoCard"
 
 
 const App = () => {
-  
+
+  const handleToDo = () => {
+    console.log('todo handle');
+  }
 
 
-  
   return (
-    <>
-      <p className="text-3xl">Hello</p>
-    </>
+    <div className="flex mt-20 flex-col items-center justify-center ">
+      <div className="flex">
+        <button onClick={handleToDo}>Create</button>
+      </div>
+      <div className="">
+
+        <ToDoCard></ToDoCard>
+
+      </div>
+    </div>
   )
 }
 
