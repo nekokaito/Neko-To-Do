@@ -10,10 +10,11 @@ const App = () => {
 
   return (
     <div className="flex mt-20 flex-col items-center justify-center ">
-      <div className="flex">
-        <button onClick={handleToDo}>Create</button>
+      <div className="flex gap-3">
+        <input className="input border-white" type="text" />
+        <button className="btn" onClick={handleToDo}>Create</button>
       </div>
-      <div className="">
+      <div className="mt-10">
 
         <ToDoCard></ToDoCard>
 
