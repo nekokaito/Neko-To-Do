@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 
@@ -12,6 +11,7 @@ const ToDoCard = ({ todo }) => {
 
      const handleEdit = async (e) => {
           const updatedTitle = e.target.innerText;
+          
           setNewTitle(updatedTitle); 
      
      }
