@@ -28,7 +28,7 @@ const App = () => {
     const getData = async () => {
       if (!userEmail) return; 
       try {
-        const response = await axios.get(`http://localhost:4000/todos?email=${userEmail}`);
+        const response = await axios.get(`http://localhost:4000/todos/${userEmail}`);
         setTodos(response.data);
       } catch (error) {
         console.error("Error fetching todos:", error);
