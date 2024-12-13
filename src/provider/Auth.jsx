@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import { app } from "../firebase/firebase";
 import { createContext, useEffect } from "react";
 import { useState } from "react";
@@ -16,11 +16,16 @@ const googleProvider = new GoogleAuthProvider();
 const Auth = ({ children }) => {
 
      const [user, setUser] = useState(null);
-     
+
 
      const googleLogin = () => {
 
           return signInWithPopup(auth, googleProvider)
+     }
+
+     const logOut = () => {
+
+          return signOut(auth);
      }
 
      useEffect(() => {
@@ -34,12 +39,10 @@ const Auth = ({ children }) => {
      }, [])
 
      const infoUser = {
-          googleLogin, user
+          googleLogin, user, logOut
      }
 
-     const logOut = () =>{
-             
-     }
+
 
 
 
