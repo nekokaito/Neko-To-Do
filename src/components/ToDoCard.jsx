@@ -3,7 +3,7 @@ import { useState } from "react";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 
-const ToDoCard = ({ todo }) => {
+const ToDoCard = ({ tempTodo, todo }) => {
      const { _id, title } = todo;
 
      const [newTitle, setNewTitle] = useState(title);
@@ -18,7 +18,7 @@ const ToDoCard = ({ todo }) => {
                     title: updatedTitle,
                });
 
-              
+
 
                setNewTitle(updatedTitle);
           } catch (error) {
@@ -37,14 +37,19 @@ const ToDoCard = ({ todo }) => {
      }
 
 
-
+     console.log(newTitle);
 
 
      return (
           <div className="card bg-primary text-primary-content flex justify-center items-center w-96 h-20">
                <div className="flex gap-6">
                     <h1 className="text-2xl w-40" contentEditable="true" suppressContentEditableWarning={true}
-                         onBlur={handleEdit}>{newTitle}</h1>
+                         onBlur={handleEdit}>
+
+
+                         {newTitle == 'undefined' ? tempTodo : newTitle}
+
+                    </h1>
                     <div className="">
 
                          <button onClick={handleRemove} className="btn"><MdOutlineDeleteForever /></button>

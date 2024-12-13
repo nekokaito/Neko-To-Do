@@ -10,23 +10,29 @@ const App = () => {
 
   const { user } = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
+  const [tempTodo, setTempTodo] = useState('');
 
   const userEmail = user?.email
+
+
   const handleToDo = async (e) => {
     e.preventDefault();
 
     const inputTodo = e.target.todo_title.value;
-    
+    setTempTodo(inputTodo);
 
-    await axios.post('http://localhost:4000/add-todo', { title: inputTodo, email: userEmail }).then(res => console.log(res.data))
+    const res = await axios.post('http://localhost:4000/add-todo', { title: inputTodo, email: userEmail })
+    setTodos((prevTodos) => [...prevTodos, res.data]);
+
+
 
     e.target.todo_title.value = "";
-    location.reload();
+
   }
 
   useEffect(() => {
     const getData = async () => {
-      if (!userEmail) return; 
+      if (!userEmail) return;
       try {
         const response = await axios.get(`http://localhost:4000/todos/${userEmail}`);
         setTodos(response.data);
@@ -35,7 +41,7 @@ const App = () => {
       }
     };
     getData();
-  }, [userEmail]); 
+  }, [userEmail]);
 
 
   console.log(todos)
@@ -54,7 +60,7 @@ const App = () => {
       </div>
       <div className="mt-10 flex flex-col gap-5">
         {
-          todos.map(todo => <ToDoCard key={todo._id} todo={todo}></ToDoCard>)
+          todos.map(todo => <ToDoCard key={todo._id} tempTodo={tempTodo} todo={todo}></ToDoCard>)
         }
 
 
