@@ -37,6 +37,10 @@ const Auth = ({ children }) => {
           googleLogin, user
      }
 
+     const logOut = () =>{
+             
+     }
+
 
 
      return (
