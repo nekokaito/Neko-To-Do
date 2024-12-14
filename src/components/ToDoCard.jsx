@@ -37,7 +37,7 @@ const ToDoCard = ({ tempTodo, todo }) => {
      }
 
 
-     console.log(newTitle);
+     
 
 
      return (
