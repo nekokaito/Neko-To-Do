@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import {useState } from "react";
 import { MdOutlineDeleteForever } from "react-icons/md";
 
 
-const ToDoCard = ({ tempTodo, todo }) => {
+
+const ToDoCard = ({ deleteTodo, tempTodo, todo }) => {
+
      const { _id, title } = todo;
 
      const [newTitle, setNewTitle] = useState(title);
@@ -31,13 +33,15 @@ const ToDoCard = ({ tempTodo, todo }) => {
      };
 
 
-     const handleRemove = () => {
+     const handleRemove = async () => {
+
+          deleteTodo(_id);
 
 
      }
 
 
-     
+
 
 
      return (

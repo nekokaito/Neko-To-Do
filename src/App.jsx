@@ -30,12 +30,21 @@ const App = () => {
 
   }
 
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`http://localhost:4000/todos/${id}`);
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
+    } catch (error) {
+      console.error("Error deleting todo:", error);
+    }
+  };
+
   useEffect(() => {
     const getData = async () => {
       if (!userEmail) return;
       try {
-        const response = await axios.get(`http://localhost:4000/todos/${userEmail}`);
-        setTodos(response.data);
+        const res = await axios.get(`http://localhost:4000/todos/${userEmail}`);
+        setTodos(res.data);
       } catch (error) {
         console.error("Error fetching todos:", error);
       }
@@ -60,7 +69,7 @@ const App = () => {
       </div>
       <div className="mt-10 flex flex-col gap-5">
         {
-          todos.map(todo => <ToDoCard key={todo._id} tempTodo={tempTodo} todo={todo}></ToDoCard>)
+          todos.map(todo => <ToDoCard key={todo._id} deleteTodo={deleteTodo} tempTodo={tempTodo} todo={todo}></ToDoCard>)
         }
 
 
