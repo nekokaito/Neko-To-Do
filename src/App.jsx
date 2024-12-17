@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "./provider/Auth";
 import GoogleLogin from "./components/GoogleLogin";
 import UserProfile from "./components/UserProfile";
+import baseURL from "./hooks/baseURL";
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
     const inputTodo = e.target.todo_title.value;
     setTempTodo(inputTodo);
 
-    const res = await axios.post('http://localhost:4000/add-todo', { title: inputTodo, email: userEmail })
+    const res = await axios.post(`${baseURL}/add-todo`, { title: inputTodo, email: userEmail })
     setTodos((prevTodos) => [...prevTodos, res.data]);
 
 
@@ -32,7 +33,7 @@ const App = () => {
 
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/todos/${id}`);
+      await axios.delete(`${baseURL}/todos/${id}`);
       setTodos((prevTodos) => prevTodos.filter((todo) => todo._id !== id));
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -43,7 +44,7 @@ const App = () => {
     const getData = async () => {
       if (!userEmail) return;
       try {
-        const res = await axios.get(`http://localhost:4000/todos/${userEmail}`);
+        const res = await axios.get(`${baseURL}/todos/${userEmail}`);
         setTodos(res.data);
       } catch (error) {
         console.error("Error fetching todos:", error);
@@ -53,7 +54,7 @@ const App = () => {
   }, [userEmail]);
 
 
-  console.log(todos)
+  
 
   return (
     <div className="flex mt-20 flex-col items-center justify-center ">
